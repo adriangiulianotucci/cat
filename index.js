@@ -34,7 +34,7 @@ const run = async () => {
   try {
     shell.exec(gitCloneCommand);
 
-    chdir("vegan-api");
+    chdir(folderName);
 
     shell.exec(deleteGitFolderCommand);
   } catch (error) {
