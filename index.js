@@ -3,6 +3,7 @@
 import chalk from "chalk";
 import clear from "clear";
 import shell from "shelljs";
+import { chdir } from "node:process";
 
 import files from "./lib/files.js";
 import logo from "./lib/logo.js";
@@ -29,15 +30,13 @@ const run = async () => {
 
   const gitCloneCommand = `git clone ${selectedRepo.githubUrl} ${folderName}`;
   const deleteGitFolderCommand = "rm -rf ./.git";
-  const initializeGitCommand = "git init";
 
   try {
     shell.exec(gitCloneCommand);
-    shell.cd(folderName);
-    shell.cd(deleteGitFolderCommand);
-    shell.cd(initializeGitCommand);
 
-    console.log(gitCloneCommand);
+    chdir("vegan-api");
+
+    shell.exec(deleteGitFolderCommand);
   } catch (error) {
     chalk.red(`There was an error cloning the repo`);
     console.log(error);
